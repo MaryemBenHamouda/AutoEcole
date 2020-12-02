@@ -3,17 +3,17 @@ const router = express.router();
 const { check, validationResult } = require("express-validator");
 const Condidat = require("../models/Condidat");
 const { check, validationResult } = require("express-validator");
-const authSecretaire = require("../middleware/authSecretaire");
-const Secretaire = require("../models/Secretaire");
+const authSecretaire = require("../middleware/authUser");
+const User = require("../models/User");
 
 //Register Condidat
 
 router.post(
   "/",
   [
-    authSecretaire,
+    authUser,
     [
-      check("nom", " SVP tapez nom du condidat").not().isEmpty(),
+      check("nom", "SVP tapez nom du condidat").not().isEmpty(),
       check("prenom", "SVP tapez prénom du candidat").not().isEmpty(),
       check("nomMari", "SVP tapez nom du mari").not().isEmpty(),
       check("cin", "SVP tapez numéro du CIN de condidat")
@@ -27,7 +27,6 @@ router.post(
         .not()
         .isEmpty()
         .isLength({ max: 8 }),
-      ,
       check("dateNaissance", " SVP tapez date de naissance").not().isEmpty(),
       check("lieu", "SVP tapez lieu de naissance").not().isEmpty(),
       check("adresse", "SVP tapez adresse du candidat").not().isEmpty(),
@@ -66,11 +65,11 @@ router.post(
           lieu,
           adresse,
         });
-        Secretaire.findById(req.secretaire.id).then((secretaire) => {
-          secretaire.condidat.push(condidat);
-          condidat.secretaire = secretaire;
+        User.findById(req.secretaire.id).then((secretaire) => {
+          user.condidat.push(condidat);
+          condidat.secretaire = user;
           condidat.save().then((data) => res.json(data));
-          secretaire.save();
+          user.save();
         });
       }
     });
@@ -79,7 +78,7 @@ router.post(
         .then((condidat) => res.json(condidat))
         .catch((err) => {
           console.error(err.message);
-          res.status(500).send("erreure du serveur");
+          res.status(500).send("erreur du serveur");
         });
     });
   }
@@ -149,3 +148,4 @@ router.put("/:id", authInfermier, (req, res) => {
 //         console.error(err.message);
 //       });
 //   });
+module.exports = router;

@@ -1,6 +1,6 @@
 const mongoose = required("mongoose");
 
-const SecretaireSchema = mongoose.Schema({
+const UserSchema = mongoose.Schema({
   candidat: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -13,11 +13,11 @@ const SecretaireSchema = mongoose.Schema({
       ref: "moniteur",
     },
   ],
-  Nom: {
+  firstname: {
     type: String,
     required: true,
   },
-  Prenom: {
+  lastname: {
     type: String,
     required: true,
   },
@@ -25,11 +25,11 @@ const SecretaireSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  matricule: {
+  email: {
     type: String,
     required: true,
   },
-  tel: {
+  phone: {
     type: Number,
     required: true,
   },
@@ -38,4 +38,4 @@ const SecretaireSchema = mongoose.Schema({
     default: Date.now,
   },
 });
-model.exports = mongoose.Schema("secretaire", SecretaireSchema);
+model.exports = mongoose.Schema("user", UserSchema);
