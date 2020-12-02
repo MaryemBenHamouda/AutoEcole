@@ -1,10 +1,10 @@
 const mongoose = required("mongoose");
 
 const ChefSchema = mongoose.Schema({
-  secretaire: [
+  user: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "candidat",
+      ref: "usert",
     },
   ],
   moniteur: [
@@ -19,11 +19,11 @@ const ChefSchema = mongoose.Schema({
       ref: "voiture",
     },
   ],
-  Nom: {
+  firstname: {
     type: String,
     required: true,
   },
-  Prenom: {
+  lastname: {
     type: String,
     required: true,
   },
@@ -31,7 +31,7 @@ const ChefSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  matricule: {
+  email: {
     type: String,
     required: true,
   },

@@ -14,11 +14,11 @@ const MoniteurSchema = mongoose.Schema({
       ref: "heursMoniteur",
     },
   ],
-  Nom: {
+  firstname: {
     type: String,
     required: true,
   },
-  Prenom: {
+  lastname: {
     type: String,
     required: true,
   },
@@ -26,12 +26,11 @@ const MoniteurSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  matricule: {
+  email: {
     type: String,
     required: true,
   },
-
-  tel: {
+  phone: {
     type: Number,
     required: true,
   },
